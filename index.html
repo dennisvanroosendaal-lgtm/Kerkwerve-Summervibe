@@ -557,8 +557,8 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
         </div>
         <button type="submit" class="merch-form-submit" style="width:100%;justify-content:center;margin-bottom:8px">AFREKENEN</button>
       </form>
-      <div id="cart-success" class="merch-form-success">BESTELLING ONTVANGEN — We nemen binnen 1-2 werkdagen contact met je op!</div>
     </div>
+    <div id="cart-success" class="merch-form-success">BESTELLING ONTVANGEN — We nemen binnen 1-2 werkdagen contact met je op!</div>
   </div>
 </div>
 
@@ -621,6 +621,8 @@ window.addEventListener('scroll',function(){
       itemsEl.innerHTML='';
       checkoutEl.style.display='none';
     }else{
+      document.getElementById('cart-success').classList.remove('visible');
+      document.getElementById('cart-form').style.display='';
       emptyEl.style.display='none';
       checkoutEl.style.display='block';
       itemsEl.innerHTML=cart.map(function(item,i){
