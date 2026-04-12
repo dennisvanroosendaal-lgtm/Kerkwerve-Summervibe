@@ -166,7 +166,26 @@ nav{
   padding:52px 44px;text-align:center;
 }
 .ticket-name{font-family:var(--fd);font-size:64px;line-height:.9;margin-bottom:16px}
+.ticket-price{display:inline-block;background:var(--yellow);color:var(--black);font-family:var(--fd);font-size:72px;line-height:1;padding:4px 24px;margin-bottom:8px;letter-spacing:2px}
+.ticket-price-label{font-family:var(--fm);font-size:9px;letter-spacing:3px;color:rgba(245,240,232,.45);margin-bottom:24px}
 .ticket-sub{font-family:var(--fm);font-size:11px;letter-spacing:.5px;line-height:2.2;color:var(--muted);margin-bottom:32px}
+/* STICKY TICKET BUTTON */
+.sticky-ticket{
+  position:fixed;bottom:28px;right:28px;z-index:800;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:18px 36px;
+  background:var(--yellow);color:var(--black);
+  font-family:var(--fd);font-size:16px;letter-spacing:4px;
+  text-decoration:none;
+  box-shadow:0 8px 32px rgba(0,0,0,.55),0 0 0 2px rgba(255,221,0,.25);
+  transition:transform .2s,box-shadow .2s,opacity .3s,visibility .3s;
+  opacity:0;visibility:hidden;
+}
+.sticky-ticket.visible{opacity:1;visibility:visible}
+.sticky-ticket:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(0,0,0,.65),0 0 0 2px rgba(255,221,0,.4)}
+@media(max-width:768px){
+  .sticky-ticket{left:0;right:0;bottom:0;width:100%;box-sizing:border-box;justify-content:center;border-radius:0;padding:16px 20px;font-size:15px}
+}
 
 /* MERCH */
 .sec-merch{background:var(--black)}
@@ -371,8 +390,10 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
     <div class="s-rule" style="margin:0 auto 44px"></div>
     <div class="ticket-box">
       <div class="ticket-name">TICKABLE</div>
+      <div class="ticket-price">€40,00</div>
+      <div class="ticket-price-label">PER PERSOON · INCLUSIEF TOEGANG TOT ALLE ACTS</div>
       <div class="ticket-sub">Zaterdag 29 augustus 2026<br>14:00 – 22:30 uur<br>Provincialeweg 9 · Kerkwerve · Zeeland<br>🍺 Inclusief drank</div>
-      <a href="https://kerkwerve-summervibe.tickable.nl/kerkwerve-summervibe" target="_blank" class="btn-yel" style="width:100%;justify-content:center">🎟 BESTEL NU JE TICKETS</a>
+      <a href="https://kerkwerve-summervibe.tickable.nl/kerkwerve-summervibe" target="_blank" class="btn-yel" style="width:100%;justify-content:center;padding:20px 40px;font-size:18px;letter-spacing:5px;margin-top:8px">🎟 BESTEL NU JE TICKETS</a>
     </div>
   </div>
 </section>
@@ -491,6 +512,8 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
   <div class="ft-copy">© 2026 KERKWERVE SUMMERVIBE ✦ KERKWERVESUMMERVIBE.NL</div>
 </footer>
 
+<a id="sticky-ticket" class="sticky-ticket" href="https://kerkwerve-summervibe.tickable.nl/kerkwerve-summervibe" target="_blank">🎟 KOOP TICKETS — €40,00</a>
+
 <button id="cart-btn" class="cart-fab" onclick="openCart()" aria-label="Winkelmandje bekijken">
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
   <span id="cart-count" class="cart-badge" style="display:none">0</span>
@@ -538,6 +561,9 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
 window.addEventListener('scroll',function(){
   var n=document.querySelector('nav');
   n.style.borderBottomColor=window.scrollY>60?'rgba(255,221,0,0.25)':'rgba(255,221,0,0.12)';
+  var hero=document.querySelector('.hero');
+  var st=document.getElementById('sticky-ticket');
+  if(hero&&st){st.classList.toggle('visible',window.scrollY>hero.offsetHeight);}
 });
 </script>
 <script>
