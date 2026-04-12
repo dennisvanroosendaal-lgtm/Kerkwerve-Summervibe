@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kerkwerve Summervibe 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('Ds6NPcXu7KA1oWssx');</script>
 
 <!-- WhatsApp / Social preview -->
 <meta property="og:title" content="Kerkwerve Summervibe 2026">
@@ -538,7 +540,7 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
       <form id="cart-form" novalidate>
         <div class="merch-form-row merch-form-row-2">
           <div><label class="merch-form-label">NAAM *</label><input type="text" name="naam" class="merch-form-input" placeholder="Voornaam Achternaam" required></div>
-          <div><label class="merch-form-label">E-MAILADRES *</label><input type="email" name="_replyto" class="merch-form-input" placeholder="jouw@email.nl" required></div>
+          <div><label class="merch-form-label">E-MAILADRES *</label><input type="email" name="email" class="merch-form-input" placeholder="jouw@email.nl" required></div>
         </div>
         <div class="merch-form-row">
           <div><label class="merch-form-label">TELEFOONNUMMER *</label><input type="tel" name="telefoon" class="merch-form-input" placeholder="+31 6 12345678" required></div>
@@ -555,7 +557,7 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
         </div>
         <button type="submit" class="merch-form-submit" style="width:100%;justify-content:center;margin-bottom:8px">AFREKENEN</button>
       </form>
-      <div id="cart-success" class="merch-form-success">BESTELLING ONTVANGEN &#x2713;<br>Je ontvangt een bevestiging op je e-mailadres.</div>
+      <div id="cart-success" class="merch-form-success">BESTELLING ONTVANGEN — We nemen binnen 1-2 werkdagen contact met je op!</div>
     </div>
   </div>
 </div>
@@ -661,20 +663,36 @@ window.addEventListener('scroll',function(){
       return (i+1)+'. '+item.name+' \u2014 '+item.variantLabel+': '+item.variant+' \xd7 '+item.aantal+' = '+fmt(item.price*item.aantal);
     });
     lines.push('','TOTAAL: '+fmt(cart.reduce(function(s,i){return s+i.price*i.aantal;},0)));
-    var bf=this.querySelector('[name="bestelling"]');
-    if(!bf){bf=document.createElement('input');bf.type='hidden';bf.name='bestelling';this.appendChild(bf);}
-    bf.value=lines.join('\n');
+    var emailVal=this.querySelector('[name="email"]').value;
+    var params={
+      to_email:emailVal,
+      from_name:this.querySelector('[name="naam"]').value,
+      from_email:emailVal,
+      telefoon:this.querySelector('[name="telefoon"]').value,
+      adres:this.querySelector('[name="adres"]').value,
+      postcode:this.querySelector('[name="postcode"]').value,
+      stad:this.querySelector('[name="stad"]').value,
+      product:lines.join('\n'),
+      variant:cart.map(function(i){return i.variantLabel+': '+i.variant;}).join(' | '),
+      aantal:cart.map(function(i){return 'x'+i.aantal;}).join(' | '),
+      opmerking:this.querySelector('[name="opmerking"]').value
+    };
     var btn=this.querySelector('.merch-form-submit');
     btn.disabled=true;btn.textContent='VERSTUREN\u2026';
     var self=this;
-    fetch('https://formspree.io/f/mzdypplr',{method:'POST',body:new FormData(self),headers:{Accept:'application/json'}})
-    .then(function(r){
-      if(r.ok){
-        self.style.display='none';
-        document.getElementById('cart-success').classList.add('visible');
-        cart=[];updateCartUI();
-      }else{btn.disabled=false;btn.textContent='AFREKENEN';alert('Er is een fout opgetreden. Probeer het opnieuw.');}
-    }).catch(function(){btn.disabled=false;btn.textContent='AFREKENEN';alert('Er is een fout opgetreden. Controleer je verbinding.');});
+    Promise.all([
+      emailjs.send('service_h0plhjj','template_kj7ws7b',params),
+      emailjs.send('service_h0plhjj','template_muhbtx4',params)
+    ]).then(function(){
+      self.style.display='none';
+      document.getElementById('cart-success').classList.add('visible');
+      cart=[];updateCartUI();
+    }).catch(function(){
+      btn.disabled=false;btn.textContent='AFREKENEN';
+      var errEl=document.getElementById('cart-error');
+      if(!errEl){errEl=document.createElement('div');errEl.id='cart-error';errEl.style.cssText='color:#e8572a;font-family:var(--fm);font-size:11px;letter-spacing:1px;margin-top:8px;line-height:1.6';self.parentNode.insertBefore(errEl,self.nextSibling);}
+      errEl.textContent='Er ging iets mis. Probeer het opnieuw of stuur een DM via Instagram.';
+    });
   });
 
   // Remove invalid on input
