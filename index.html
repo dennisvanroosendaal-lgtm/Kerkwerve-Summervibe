@@ -688,8 +688,9 @@ window.addEventListener('scroll',function(){
     // Stuur notificatie naar Dennis (leidend voor de UI)
     emailjs.send('service_h0plhjj','template_muhbtx4',params)
     .then(function(){
-      self.style.display='none';
       document.getElementById('cart-success').classList.add('visible');
+      btn.disabled=false;btn.textContent='AFREKENEN';
+      self.reset();
       cart=[];updateCartUI();
       // Klantbevestiging los proberen — faalt stil zodat UX niet breekt
       emailjs.send('service_h0plhjj','template_kj7ws7b',params)
