@@ -680,14 +680,17 @@ window.addEventListener('scroll',function(){
     var btn=this.querySelector('.merch-form-submit');
     btn.disabled=true;btn.textContent='VERSTUREN\u2026';
     var self=this;
-    Promise.all([
-      emailjs.send('service_h0plhjj','template_kj7ws7b',params),
-      emailjs.send('service_h0plhjj','template_muhbtx4',params)
-    ]).then(function(){
+    // Stuur notificatie naar Dennis (leidend voor de UI)
+    emailjs.send('service_h0plhjj','template_muhbtx4',params)
+    .then(function(){
       self.style.display='none';
       document.getElementById('cart-success').classList.add('visible');
       cart=[];updateCartUI();
-    }).catch(function(){
+      // Klantbevestiging los proberen — faalt stil zodat UX niet breekt
+      emailjs.send('service_h0plhjj','template_kj7ws7b',params)
+      .catch(function(err){console.warn('Klantbevestiging niet verstuurd:',err);});
+    }).catch(function(err){
+      console.error('Notificatie mislukt:',err);
       btn.disabled=false;btn.textContent='AFREKENEN';
       var errEl=document.getElementById('cart-error');
       if(!errEl){errEl=document.createElement('div');errEl.id='cart-error';errEl.style.cssText='color:#e8572a;font-family:var(--fm);font-size:11px;letter-spacing:1px;margin-top:8px;line-height:1.6';self.parentNode.insertBefore(errEl,self.nextSibling);}
