@@ -246,6 +246,22 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
     .merch-product-rev{direction:ltr}
   }
 
+/* ── BESTELFORMULIEREN ── */
+.merch-form-wrap{margin-top:8px}
+.merch-form-row{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:10px}
+.merch-form-row-2{grid-template-columns:1fr 1fr}
+.merch-form-label{font-family:var(--fm);font-size:9px;letter-spacing:3px;color:var(--yellow);display:block;margin-bottom:4px}
+.merch-form-input,.merch-form-select,.merch-form-textarea{width:100%;box-sizing:border-box;background:#0f0f0f;border:1px solid rgba(245,240,232,.15);color:var(--off-white);font-family:var(--fm);font-size:11px;padding:10px 12px;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;border-radius:0}
+.merch-form-input:focus,.merch-form-select:focus,.merch-form-textarea:focus{border-color:var(--yellow)}
+.merch-form-input.invalid,.merch-form-select.invalid,.merch-form-textarea.invalid{border-color:#e8572a}
+.merch-form-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ffdd00' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer}
+.merch-form-textarea{min-height:72px;resize:vertical}
+.merch-form-submit{display:inline-flex;align-items:center;gap:8px;padding:15px 40px;background:var(--yellow);color:var(--black);font-family:var(--fd);font-size:14px;letter-spacing:4px;border:none;cursor:pointer;box-shadow:0 8px 28px rgba(255,221,0,.28);transition:transform .2s,box-shadow .2s;margin-top:4px}
+.merch-form-submit:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(255,221,0,.42)}
+.merch-form-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.merch-form-success{background:rgba(255,221,0,.06);border:1px solid rgba(255,221,0,.3);padding:16px 20px;font-family:var(--fm);font-size:11px;letter-spacing:1px;color:var(--yellow);line-height:1.8;margin-top:12px;display:none}
+.merch-form-success.visible{display:block}
+@media(max-width:768px){.merch-form-row-2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -361,7 +377,34 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
         </div>
         <div class="merch-price">€19,99</div>
         <div class="merch-sub" style="margin-bottom:20px">Per stuk · Alle kleuren · Limited edition · Op = op</div>
-        <a href="https://www.instagram.com/kerkwerve_summervibe" target="_blank" class="btn-yel">BESTELLEN VIA INSTAGRAM DM</a>
+        <div class="merch-form-wrap">
+          <form class="merch-order-form" id="form-cap" novalidate>
+            <input type="hidden" name="product" value="Snapback Cap — Kerkwerve Summervibe">
+            <div class="merch-form-row merch-form-row-2">
+              <div><label class="merch-form-label">NAAM *</label><input type="text" name="naam" class="merch-form-input" placeholder="Voornaam Achternaam" required></div>
+              <div><label class="merch-form-label">E-MAILADRES *</label><input type="email" name="_replyto" class="merch-form-input" placeholder="jouw@email.nl" required></div>
+            </div>
+            <div class="merch-form-row">
+              <div><label class="merch-form-label">TELEFOONNUMMER *</label><input type="tel" name="telefoon" class="merch-form-input" placeholder="+31 6 12345678" required></div>
+            </div>
+            <div class="merch-form-row">
+              <div><label class="merch-form-label">ADRES *</label><input type="text" name="adres" class="merch-form-input" placeholder="Straatnaam 1" required></div>
+            </div>
+            <div class="merch-form-row merch-form-row-2">
+              <div><label class="merch-form-label">POSTCODE *</label><input type="text" name="postcode" class="merch-form-input" placeholder="1234 AB" required></div>
+              <div><label class="merch-form-label">STAD *</label><input type="text" name="stad" class="merch-form-input" placeholder="Amsterdam" required></div>
+            </div>
+            <div class="merch-form-row merch-form-row-2">
+              <div><label class="merch-form-label">KLEUR *</label><select name="kleur" class="merch-form-select" required><option value="">Kies een kleur</option><option value="Black">Black</option><option value="Purple">Purple</option><option value="Navy">Navy</option><option value="Pink">Pink</option></select></div>
+              <div><label class="merch-form-label">AANTAL *</label><input type="number" name="aantal" class="merch-form-input" value="1" min="1" required></div>
+            </div>
+            <div class="merch-form-row">
+              <div><label class="merch-form-label">OPMERKING</label><textarea name="opmerking" class="merch-form-textarea" placeholder="Optionele opmerking..."></textarea></div>
+            </div>
+            <button type="submit" class="merch-form-submit">BESTELLEN</button>
+          </form>
+          <div class="merch-form-success" id="success-cap">BESTELLING ONTVANGEN ✓<br>Je ontvangt een bevestiging op je e-mailadres.</div>
+        </div>
       </div>
     </div>
 
@@ -394,7 +437,34 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
         </div>
         <div class="merch-price">€29,99</div>
         <div class="merch-sub" style="margin-bottom:20px">Khaki softshell · S t/m XL · Betalen bij levering</div>
-        <a href="https://www.instagram.com/kerkwerve_summervibe" target="_blank" class="btn-yel">BESTELLEN VIA INSTAGRAM DM</a>
+        <div class="merch-form-wrap">
+          <form class="merch-order-form" id="form-jacket" novalidate>
+            <input type="hidden" name="product" value="Softshell Jacket — Kerkwerve Summervibe">
+            <div class="merch-form-row merch-form-row-2">
+              <div><label class="merch-form-label">NAAM *</label><input type="text" name="naam" class="merch-form-input" placeholder="Voornaam Achternaam" required></div>
+              <div><label class="merch-form-label">E-MAILADRES *</label><input type="email" name="_replyto" class="merch-form-input" placeholder="jouw@email.nl" required></div>
+            </div>
+            <div class="merch-form-row">
+              <div><label class="merch-form-label">TELEFOONNUMMER *</label><input type="tel" name="telefoon" class="merch-form-input" placeholder="+31 6 12345678" required></div>
+            </div>
+            <div class="merch-form-row">
+              <div><label class="merch-form-label">ADRES *</label><input type="text" name="adres" class="merch-form-input" placeholder="Straatnaam 1" required></div>
+            </div>
+            <div class="merch-form-row merch-form-row-2">
+              <div><label class="merch-form-label">POSTCODE *</label><input type="text" name="postcode" class="merch-form-input" placeholder="1234 AB" required></div>
+              <div><label class="merch-form-label">STAD *</label><input type="text" name="stad" class="merch-form-input" placeholder="Amsterdam" required></div>
+            </div>
+            <div class="merch-form-row merch-form-row-2">
+              <div><label class="merch-form-label">MAAT *</label><select name="maat" class="merch-form-select" required><option value="">Kies een maat</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option></select></div>
+              <div><label class="merch-form-label">AANTAL *</label><input type="number" name="aantal" class="merch-form-input" value="1" min="1" required></div>
+            </div>
+            <div class="merch-form-row">
+              <div><label class="merch-form-label">OPMERKING</label><textarea name="opmerking" class="merch-form-textarea" placeholder="Optionele opmerking..."></textarea></div>
+            </div>
+            <button type="submit" class="merch-form-submit">BESTELLEN</button>
+          </form>
+          <div class="merch-form-success" id="success-jacket">BESTELLING ONTVANGEN ✓<br>Je ontvangt een bevestiging op je e-mailadres.</div>
+        </div>
       </div>
     </div>
 
@@ -446,6 +516,51 @@ window.addEventListener('scroll',function(){
   var n=document.querySelector('nav');
   n.style.borderBottomColor=window.scrollY>60?'rgba(255,221,0,0.25)':'rgba(255,221,0,0.12)';
 });
+</script>
+<script>
+(function(){
+  function setupMerchForm(formId,successId){
+    var form=document.getElementById(formId);
+    var successEl=document.getElementById(successId);
+    if(!form||!successEl)return;
+    var reqFields=form.querySelectorAll('[required]');
+    reqFields.forEach(function(f){
+      f.addEventListener('input',function(){f.classList.remove('invalid')});
+      f.addEventListener('change',function(){f.classList.remove('invalid')});
+    });
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var valid=true;
+      reqFields.forEach(function(f){
+        if(!f.value.trim()){f.classList.add('invalid');valid=false;}
+      });
+      if(!valid)return;
+      var btn=form.querySelector('.merch-form-submit');
+      btn.disabled=true;
+      btn.textContent='VERSTUREN\u2026';
+      fetch('https://formspree.io/f/mzdypplr',{
+        method:'POST',
+        body:new FormData(form),
+        headers:{Accept:'application/json'}
+      }).then(function(r){
+        if(r.ok){
+          form.style.display='none';
+          successEl.classList.add('visible');
+        }else{
+          btn.disabled=false;
+          btn.textContent='BESTELLEN';
+          alert('Er is een fout opgetreden. Probeer het opnieuw.');
+        }
+      }).catch(function(){
+        btn.disabled=false;
+        btn.textContent='BESTELLEN';
+        alert('Er is een fout opgetreden. Controleer je verbinding.');
+      });
+    });
+  }
+  setupMerchForm('form-cap','success-cap');
+  setupMerchForm('form-jacket','success-jacket');
+})();
 </script>
 </body>
 </html>
