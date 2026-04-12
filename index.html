@@ -622,7 +622,10 @@ window.addEventListener('scroll',function(){
       checkoutEl.style.display='none';
     }else{
       document.getElementById('cart-success').classList.remove('visible');
-      document.getElementById('cart-form').style.display='';
+      var cf=document.getElementById('cart-form');
+      cf.style.display='';
+      var sb=cf.querySelector('.merch-form-submit');
+      if(sb){sb.disabled=false;sb.textContent='AFREKENEN';}
       emptyEl.style.display='none';
       checkoutEl.style.display='block';
       itemsEl.innerHTML=cart.map(function(item,i){
