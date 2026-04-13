@@ -519,9 +519,9 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
 </section>
 
 <!-- PRIVACY -->
-<section id="privacy" class="sec-privacy">
+<section id="privacy" class="sec-privacy" style="display:none">
   <div class="sec-inner" style="max-width:720px">
-    <div class="s-eyebrow">AVG / GDPR</div>
+    <div class="s-eyebrow">AVG</div>
     <h2 class="s-title" style="font-size:clamp(32px,5vw,56px);margin-bottom:20px">PRIVACYVERKLARING</h2>
     <div class="s-rule" style="margin-bottom:32px"></div>
     <div class="privacy-body">
@@ -544,7 +544,7 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
     <li><a href="#merch">MERCH</a></li>
     <li><a href="#info">INFORMATIE</a></li>
     <li><a href="https://www.instagram.com/kerkwerve_summervibe" target="_blank">INSTAGRAM</a></li>
-    <li><a href="#privacy">PRIVACYVERKLARING</a></li>
+    <li><a href="#privacy" onclick="showPrivacy(event)">PRIVACYVERKLARING</a></li>
   </ul>
   <div class="ft-copy">© 2026 KERKWERVE SUMMERVIBE ✦ KERKWERVESUMMERVIBE.NL</div>
 </footer>
@@ -592,7 +592,7 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
           <div id="cart-summary-lines"></div>
         </div>
         <button type="submit" class="merch-form-submit" style="width:100%;justify-content:center;margin-bottom:8px">AFREKENEN</button>
-        <p class="cart-privacy-notice">Door te bestellen ga je akkoord met de verwerking van je persoonsgegevens conform onze <a href="#privacy" class="cart-privacy-link">privacyverklaring</a>.</p>
+        <p class="cart-privacy-notice">Door te bestellen ga je akkoord met de verwerking van je persoonsgegevens conform onze <a href="#privacy" class="cart-privacy-link" onclick="showPrivacy(event)">privacyverklaring</a>.</p>
       </form>
     </div>
     <div id="cart-success" class="merch-form-success">BESTELLING ONTVANGEN — We nemen binnen 1-2 werkdagen contact met je op!</div>
@@ -790,6 +790,13 @@ window.addEventListener('scroll',function(){
     }
   });
 })();
+
+  window.showPrivacy=function(e){
+    e.preventDefault();
+    var sec=document.getElementById('privacy');
+    sec.style.display='block';
+    sec.scrollIntoView({behavior:'smooth'});
+  };
 </script>
 </body>
 </html>
