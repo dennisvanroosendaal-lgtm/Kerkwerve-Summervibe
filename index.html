@@ -525,13 +525,27 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
     <h2 class="s-title" style="font-size:clamp(32px,5vw,56px);margin-bottom:20px">PRIVACYVERKLARING</h2>
     <div class="s-rule" style="margin-bottom:32px"></div>
     <div class="privacy-body">
-      <p><strong>Verwerkingsverantwoordelijke:</strong> Kerkwerve Summervibe, bereikbaar via Instagram (@kerkwerve_summervibe).</p>
+      <p><strong>Verwerkingsverantwoordelijke:</strong> Kerkwerve Summervibe.</p>
       <p><strong>Welke gegevens en waarom:</strong> Bij een merchandise-bestelling verwerken wij naam, e-mailadres, telefoonnummer en bezorgadres. Deze gegevens worden uitsluitend gebruikt om je bestelling te verwerken en te bezorgen.</p>
       <p><strong>Bewaartermijn:</strong> Gegevens worden bewaard zolang nodig voor de orderverwerking en daarna verwijderd.</p>
       <p><strong>Delen met derden:</strong> Gegevens worden niet gedeeld met derden, met uitzondering van vervoerders die de bezorging verzorgen.</p>
-      <p><strong>Jouw rechten:</strong> Je hebt het recht op inzage, correctie of verwijdering van je gegevens. Neem daarvoor contact op via ons Instagram-account.</p>
+      <p><strong>Jouw rechten:</strong> Je hebt het recht op inzage, correctie of verwijdering van je gegevens. Gebruik het formulier hieronder om een verzoek in te dienen.</p>
       <p><strong>Klachten:</strong> Je hebt het recht een klacht in te dienen bij de Autoriteit Persoonsgegevens (autoriteitpersoonsgegevens.nl).</p>
     </div>
+    <form id="privacy-form" novalidate style="margin-top:28px">
+      <div class="merch-form-row merch-form-row-2">
+        <div><label class="merch-form-label">NAAM *</label><input type="text" name="naam" class="merch-form-input" placeholder="Voornaam Achternaam" required></div>
+        <div><label class="merch-form-label">E-MAILADRES *</label><input type="email" name="email" class="merch-form-input" placeholder="jouw@email.nl" required></div>
+      </div>
+      <div class="merch-form-row">
+        <div><label class="merch-form-label">TYPE VERZOEK *</label><select name="type" class="merch-form-select" required><option value="">Kies een optie</option><option value="Inzage">Inzage in mijn gegevens</option><option value="Correctie">Correctie van mijn gegevens</option><option value="Verwijdering">Verwijdering van mijn gegevens</option><option value="Andere vraag">Andere vraag</option></select></div>
+      </div>
+      <div class="merch-form-row">
+        <div><label class="merch-form-label">TOELICHTING</label><textarea name="toelichting" class="merch-form-textarea" placeholder="Optionele toelichting..."></textarea></div>
+      </div>
+      <button type="submit" class="merch-form-submit">VERSTUREN</button>
+    </form>
+    <div id="privacy-success" class="merch-form-success" style="margin-top:12px">Verzoek ontvangen — We nemen zo snel mogelijk contact met je op.</div>
   </div>
 </section>
 
@@ -790,6 +804,46 @@ window.addEventListener('scroll',function(){
     }
   });
 })();
+
+  // Privacy contactformulier
+  var privacyForm=document.getElementById('privacy-form');
+  if(privacyForm){
+    privacyForm.addEventListener('submit',function(e){
+      e.preventDefault();
+      var naam=this.querySelector('[name="naam"]').value.trim();
+      var email=this.querySelector('[name="email"]').value.trim();
+      var type=this.querySelector('[name="type"]').value;
+      var toelichting=this.querySelector('[name="toelichting"]').value.trim();
+      var valid=true;
+      [this.querySelector('[name="naam"]'),this.querySelector('[name="email"]'),this.querySelector('[name="type"]')].forEach(function(f){
+        if(!f.value.trim()){f.classList.add('invalid');valid=false;}
+        else{f.classList.remove('invalid');}
+      });
+      if(!valid)return;
+      var btn=this.querySelector('.merch-form-submit');
+      btn.disabled=true;btn.textContent='VERSTUREN\u2026';
+      var self=this;
+      emailjs.send('service_h0plhjj','template_muhbtx4',{
+        from_name:naam,
+        from_email:email,
+        to_email:email,
+        product:'AVG VERZOEK: '+type,
+        opmerking:toelichting||'—',
+        telefoon:'—',adres:'—',postcode:'—',stad:'—',variant:'—',aantal:'—'
+      }).then(function(){
+        self.style.display='none';
+        document.getElementById('privacy-success').classList.add('visible');
+      }).catch(function(err){
+        console.error('Privacy-verzoek mislukt:',err);
+        btn.disabled=false;btn.textContent='VERSTUREN';
+        alert('Er ging iets mis. Probeer het opnieuw of stuur een DM via Instagram.');
+      });
+    });
+    privacyForm.querySelectorAll('.merch-form-input,.merch-form-select').forEach(function(f){
+      f.addEventListener('input',function(){this.classList.remove('invalid');});
+      f.addEventListener('change',function(){this.classList.remove('invalid');});
+    });
+  }
 
   window.showPrivacy=function(e){
     e.preventDefault();
