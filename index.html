@@ -180,7 +180,8 @@ nav{
 .ticket-name{font-family:var(--fd);font-size:64px;line-height:.9;margin-bottom:16px}
 .ticket-price{display:inline-block;background:var(--yellow);color:var(--black);font-family:var(--fd);font-size:72px;line-height:1;padding:4px 24px;margin-bottom:8px;letter-spacing:2px}
 .ticket-price-label{font-family:var(--fm);font-size:9px;letter-spacing:3px;color:rgba(245,240,232,.45);margin-bottom:24px}
-.ticket-sub{font-family:var(--fm);font-size:11px;letter-spacing:.5px;line-height:2.2;color:var(--muted);margin-bottom:32px}
+.ticket-sub{font-family:var(--fm);font-size:11px;letter-spacing:.5px;line-height:2.2;color:var(--muted);margin-bottom:20px}
+.ticket-inclusief{display:inline-block;font-family:var(--fd);font-size:20px;letter-spacing:4px;color:var(--yellow);background:rgba(255,221,0,.08);border:1px solid rgba(255,221,0,.28);padding:10px 24px;margin-bottom:28px}
 
 /* MERCH */
 .sec-merch{background:var(--black)}
@@ -214,6 +215,13 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
 .ft-links a{font-family:var(--fd);font-size:13px;letter-spacing:3px;color:var(--muted);text-decoration:none;transition:color .2s}
 .ft-links a:hover{color:var(--yellow)}
 .ft-copy{font-family:var(--fm);font-size:10px;letter-spacing:1px;color:rgba(245,240,232,.18)}
+/* PRIVACY */
+.sec-privacy{background:var(--black);border-top:1px solid rgba(245,240,232,.06)}
+.privacy-body p{font-family:var(--fm);font-size:11px;letter-spacing:.5px;line-height:2;color:rgba(245,240,232,.55);margin-bottom:14px}
+.privacy-body strong{color:var(--off-white);font-weight:normal;letter-spacing:1px}
+.cart-privacy-notice{font-family:var(--fm);font-size:9px;letter-spacing:.5px;color:rgba(245,240,232,.38);line-height:1.7;text-align:center;margin-top:4px;margin-bottom:4px}
+.cart-privacy-link{color:rgba(255,221,0,.55);text-decoration:underline}
+.cart-privacy-link:hover{color:var(--yellow)}
 
 /* MOBILE */
 @media(max-width:768px){
@@ -303,6 +311,9 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
 .cart-total-lbl{font-family:var(--fm);font-size:9px;letter-spacing:3px;color:rgba(245,240,232,.38)}
 .cart-total-val{font-family:var(--fd);font-size:28px;color:var(--yellow)}
 .cart-field-err{font-family:var(--fm);font-size:9px;letter-spacing:1px;color:#e8572a;margin-top:4px}
+.cart-summary-box{background:rgba(255,221,0,.03);border:1px solid rgba(255,221,0,.1);padding:12px 14px;margin-bottom:14px}
+.cart-summary-hd{font-family:var(--fm);font-size:8px;letter-spacing:3px;color:rgba(255,221,0,.5);margin-bottom:8px}
+.cart-summary-line{font-family:var(--fm);font-size:10px;letter-spacing:.5px;color:rgba(245,240,232,.75);line-height:1.9}
 </style>
 </head>
 <body>
@@ -398,7 +409,8 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
       <h3 class="ticket-name">TICKABLE</h3>
       <div class="ticket-price">€40,00</div>
       <div class="ticket-price-label">PER PERSOON</div>
-      <div class="ticket-sub">Zaterdag 29 augustus 2026<br>14:00 – 22:00 uur<br>Provincialeweg 9 · Kerkwerve · Zeeland<br>🍺 Inclusief drank</div>
+      <div class="ticket-sub">Zaterdag 29 augustus 2026<br>14:00 – 22:00 uur<br>Provincialeweg 9 · Kerkwerve · Zeeland</div>
+      <div class="ticket-inclusief">🍺 INCLUSIEF DRANK</div>
       <a href="https://kerkwerve-summervibe.tickable.nl/kerkwerve-summervibe" target="_blank" class="btn-yel" style="width:100%;justify-content:center;padding:20px 40px;font-size:18px;letter-spacing:5px;margin-top:8px">🎟 BESTEL NU JE TICKETS</a>
     </div>
   </div>
@@ -506,6 +518,23 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
   </div>
 </section>
 
+<!-- PRIVACY -->
+<section id="privacy" class="sec-privacy">
+  <div class="sec-inner" style="max-width:720px">
+    <div class="s-eyebrow">AVG / GDPR</div>
+    <h2 class="s-title" style="font-size:clamp(32px,5vw,56px);margin-bottom:20px">PRIVACYVERKLARING</h2>
+    <div class="s-rule" style="margin-bottom:32px"></div>
+    <div class="privacy-body">
+      <p><strong>Verwerkingsverantwoordelijke:</strong> Kerkwerve Summervibe, bereikbaar via Instagram (@kerkwerve_summervibe).</p>
+      <p><strong>Welke gegevens en waarom:</strong> Bij een merchandise-bestelling verwerken wij naam, e-mailadres, telefoonnummer en bezorgadres. Deze gegevens worden uitsluitend gebruikt om je bestelling te verwerken en te bezorgen.</p>
+      <p><strong>Bewaartermijn:</strong> Gegevens worden bewaard zolang nodig voor de orderverwerking en daarna verwijderd.</p>
+      <p><strong>Delen met derden:</strong> Gegevens worden niet gedeeld met derden, met uitzondering van vervoerders die de bezorging verzorgen.</p>
+      <p><strong>Jouw rechten:</strong> Je hebt het recht op inzage, correctie of verwijdering van je gegevens. Neem daarvoor contact op via ons Instagram-account.</p>
+      <p><strong>Klachten:</strong> Je hebt het recht een klacht in te dienen bij de Autoriteit Persoonsgegevens (autoriteitpersoonsgegevens.nl).</p>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="ft-logo">KERKWERVE SUMMERVIBE</div>
   <div class="ft-tag">— Lost in the life of old school —</div>
@@ -515,6 +544,7 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
     <li><a href="#merch">MERCH</a></li>
     <li><a href="#info">INFORMATIE</a></li>
     <li><a href="https://www.instagram.com/kerkwerve_summervibe" target="_blank">INSTAGRAM</a></li>
+    <li><a href="#privacy">PRIVACYVERKLARING</a></li>
   </ul>
   <div class="ft-copy">© 2026 KERKWERVE SUMMERVIBE ✦ KERKWERVESUMMERVIBE.NL</div>
 </footer>
@@ -557,7 +587,12 @@ footer{background:var(--black);border-top:1px solid rgba(245,240,232,.06);paddin
         <div class="merch-form-row">
           <div><label class="merch-form-label">OPMERKING</label><textarea name="opmerking" class="merch-form-textarea" placeholder="Optionele opmerking..."></textarea></div>
         </div>
+        <div id="cart-summary-box" class="cart-summary-box">
+          <div class="cart-summary-hd">JOUW BESTELLING</div>
+          <div id="cart-summary-lines"></div>
+        </div>
         <button type="submit" class="merch-form-submit" style="width:100%;justify-content:center;margin-bottom:8px">AFREKENEN</button>
+        <p class="cart-privacy-notice">Door te bestellen ga je akkoord met de verwerking van je persoonsgegevens conform onze <a href="#privacy" class="cart-privacy-link">privacyverklaring</a>.</p>
       </form>
     </div>
     <div id="cart-success" class="merch-form-success">BESTELLING ONTVANGEN — We nemen binnen 1-2 werkdagen contact met je op!</div>
@@ -643,6 +678,12 @@ window.addEventListener('scroll',function(){
         '</div>';
       }).join('');
       document.getElementById('cart-total').textContent=fmt(cart.reduce(function(s,i){return s+i.price*i.aantal;},0));
+      var summaryLines=document.getElementById('cart-summary-lines');
+      if(summaryLines){
+        summaryLines.innerHTML=cart.map(function(item){
+          return '<div class="cart-summary-line">— '+item.name+' · '+item.variantLabel+': '+item.variant+' · x'+item.aantal+'</div>';
+        }).join('');
+      }
     }
   }
 
