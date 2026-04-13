@@ -820,24 +820,11 @@ window.addEventListener('scroll',function(){
         else{f.classList.remove('invalid');}
       });
       if(!valid)return;
-      var btn=this.querySelector('.merch-form-submit');
-      btn.disabled=true;btn.textContent='VERSTUREN\u2026';
-      var self=this;
-      emailjs.send('service_h0plhjj','template_muhbtx4',{
-        from_name:naam,
-        from_email:email,
-        to_email:email,
-        product:'AVG VERZOEK: '+type,
-        opmerking:toelichting||'—',
-        telefoon:'—',adres:'—',postcode:'—',stad:'—',variant:'—',aantal:'—'
-      }).then(function(){
-        self.style.display='none';
-        document.getElementById('privacy-success').classList.add('visible');
-      }).catch(function(err){
-        console.error('Privacy-verzoek mislukt:',err);
-        btn.disabled=false;btn.textContent='VERSTUREN';
-        alert('Er ging iets mis. Probeer het opnieuw of stuur een DM via Instagram.');
-      });
+      var subject=encodeURIComponent('AVG Verzoek \u2014 '+type);
+      var body=encodeURIComponent('Naam: '+naam+'\nE-mail: '+email+'\nVerzoek: '+type+'\n\nToelichting:\n'+(toelichting||'\u2014'));
+      window.location.href='mailto:dennisvanroosendaal@gmail.com?subject='+subject+'&body='+body;
+      privacyForm.style.display='none';
+      document.getElementById('privacy-success').classList.add('visible');
     });
     privacyForm.querySelectorAll('.merch-form-input,.merch-form-select').forEach(function(f){
       f.addEventListener('input',function(){this.classList.remove('invalid');});
